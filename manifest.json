@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+    "name": "ResultSkipper",
+    "version": "0.0.1",
+    "description": "Skips result page.",
+    "permissions": [
+        "contextMenus",
+        "tabs",
+        "webNavigation"
+    ],
+    "background": {
+        "scripts": ["js/background.js"]
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://game.granbluefantasy.jp/*"],
+            "js": ["js/content.js"]
+        }
+    ]
+}
