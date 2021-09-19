@@ -10,13 +10,15 @@ chrome.runtime.onMessage.addListener((msg, sender, respond) => {
             supporterUrl = msg.url;
             break;
         case 'inStage':
-            inBattle();
+            setTimeout(inBattle, 800);
             break;
         case 'toResult': 
-            chrome.tabs.update({url: msg.url});
+            setTimeout(function() {
+                chrome.tabs.update({url: msg.url});
+            }, 800);
             break;  
         case 'resultPage':
-        		inBattle();
-        		break;
+            setTimeout(inBattle, 50);
+        	break;
     }
 });
