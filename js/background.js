@@ -1,20 +1,24 @@
 var supporterUrl;
+var tabId;
 
 function inBattle(){
-	chrome.tabs.update({url: supporterUrl});
+	chrome.tabs.update(tabId, {url: supporterUrl});
 }
 
 chrome.runtime.onMessage.addListener((msg, sender, respond) => {
     switch(msg.type) {
         case 'supporterPage':
             supporterUrl = msg.url;
+            chrome.tabs.query({"active": true, "lastFocusedWindow": true}, function (tabs) {
+                tabId = tabs[0].id;
+            });
             break;
         case 'inStage':
             setTimeout(inBattle, 800);
             break;
         case 'toResult': 
             setTimeout(function() {
-                chrome.tabs.update({url: msg.url});
+                chrome.tabs.update(tabId, {url: msg.url});
             }, 800);
             break;  
         case 'resultPage':
