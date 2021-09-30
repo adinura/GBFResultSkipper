@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((msg, sender, respond) => {
     switch(msg.type) {
         case 'supporterPage':
             supporterUrl = msg.url;
-            chrome.tabs.query({"active": true, "lastFocusedWindow": true}, function (tabs) {
+            chrome.tabs.query({pinned: true}, function (tabs) {
                 tabId = tabs[0].id;
             });
             break;
